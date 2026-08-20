@@ -1,0 +1,22 @@
+{
+  "name": "nephy-agent",
+  "version": "0.1.0",
+  "description": "Leazed AI — a premium, extensible OpenAI-compatible AI chat workspace.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "preview": "node server.js --port 4173"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ai",
+    "chat",
+    "openai",
+    "llm",
+    "workspace",
+    "vanilla-js"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,195 @@
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+/* ---- Tablet / small laptop ---- */
+
+@media (max-width: 1024px) {
+
+  .header {
+    padding: 0 var(--space-4);
+  }
+
+  .composer-area {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+}
+
+/* ---- Mobile: drawer sidebar ---- */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: min(var(--sidebar-width), 84vw) !important;
+
+    transform: translateX(-100%);
+
+    box-shadow: var(--shadow-lg);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .app[data-sidebar="collapsed"] .sidebar {
+    width: min(var(--sidebar-width), 84vw) !important;
+  }
+
+  /* Never collapse content on mobile */
+
+  .app[data-sidebar="collapsed"] .brand,
+  .app[data-sidebar="collapsed"] .new-chat-btn {
+    justify-content: flex-start;
+  }
+
+  .app[data-sidebar="collapsed"] .brand-name,
+  .app[data-sidebar="collapsed"] .new-chat-btn span,
+  .app[data-sidebar="collapsed"] .history-item-title,
+  .app[data-sidebar="collapsed"] .profile-info {
+    opacity: 1;
+    width: auto;
+    transform: none;
+  }
+
+  .app[data-sidebar="collapsed"] .sidebar-label {
+    opacity: 1;
+  }
+
+  .app[data-sidebar="collapsed"] .search-wrap input {
+    padding: var(--space-2) var(--space-8) var(--space-2) 34px;
+    font-size: var(--text-sm);
+  }
+
+  .app[data-sidebar="collapsed"] .search-wrap > svg {
+    left: var(--space-3);
+    transform: translateY(-50%);
+  }
+
+  .app[data-sidebar="collapsed"] .history-item {
+    justify-content: flex-start;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .app[data-sidebar="collapsed"] .profile {
+    justify-content: flex-start;
+    padding: var(--space-2);
+  }
+
+  .app[data-sidebar="collapsed"] .profile-info,
+  .app[data-sidebar="collapsed"] .profile-action {
+    opacity: 1;
+    width: auto;
+    overflow: visible;
+    transform: none;
+  }
+
+  .app[data-sidebar="collapsed"] .sidebar [data-tooltip]::after {
+    display: none;
+  }
+
+  .header {
+    height: 54px;
+    padding: 0 var(--space-3);
+  }
+
+  .status-pill span:last-child {
+    display: none;
+  }
+
+  .status-pill {
+    padding: 6px;
+  }
+
+  .model-select {
+    max-width: 128px;
+  }
+
+  .chat-content {
+    padding: var(--space-6) var(--space-4) var(--space-8);
+  }
+
+  .welcome {
+    padding-top: var(--space-6);
+  }
+
+  .suggestions {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  .composer-area {
+    padding: var(--space-2) var(--space-3) var(--space-3);
+  }
+
+  .toast-region {
+    left: var(--space-3);
+    right: var(--space-3);
+    align-items: stretch;
+  }
+
+  .toast {
+    max-width: none;
+  }
+
+}
+
+/* ---- Touch devices: actions must be reachable without hover ---- */
+
+@media (hover: none) {
+
+  .message-actions {
+    opacity: 1;
+  }
+
+  .history-item-actions {
+    display: flex;
+  }
+
+  .history-item-actions button {
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+/* ---- Small phones ---- */
+
+@media (max-width: 400px) {
+
+  /* Keep theme + settings; hide export/clear to fit. */
+  .header-right .icon-btn:nth-child(3),
+  .header-right .icon-btn:nth-child(4) {
+    display: none;
+  }
+
+  .model-select {
+    max-width: 110px;
+    font-size: var(--text-xs);
+  }
+
+  .chat-content {
+    padding-left: var(--space-3);
+    padding-right: var(--space-3);
+  }
+
+  .composer {
+    border-radius: var(--radius-lg);
+    padding-left: var(--space-2);
+  }
+
+  .welcome-greeting {
+    font-size: var(--text-2xl);
+  }
+
+  .suggestion {
+    padding: var(--space-3);
+  }
+
+}

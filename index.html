@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Leazed AI — a calm, extensible workspace for any OpenAI-compatible model.">
+
+  <title>Leazed AI</title>
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/composer.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <link rel="stylesheet" href="css/toast.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <script src="assets/lib/lucide.min.js"></script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#chatScroll">Skip to chat</a>
+
+  <div class="app" id="app" data-sidebar="expanded" data-density="comfortable">
+
+    <!-- ============ SIDEBAR ============ -->
+
+    <aside class="sidebar" id="sidebar" aria-label="Conversation sidebar">
+
+      <div class="sidebar-top">
+
+        <button class="brand" type="button" id="brandBtn" data-tooltip="New conversation">
+          <span class="brand-logo" aria-hidden="true">
+            <i data-lucide="sparkles"></i>
+          </span>
+          <span class="brand-name">Leazed AI</span>
+        </button>
+
+        <button class="new-chat-btn" type="button" id="newChatBtn" data-tooltip="New conversation">
+          <i data-lucide="square-pen" aria-hidden="true"></i>
+          <span>New conversation</span>
+        </button>
+
+        <div class="search-wrap" data-tooltip="Search conversations">
+          <i data-lucide="search" aria-hidden="true"></i>
+          <input
+            type="search"
+            id="historySearch"
+            placeholder="Search conversations"
+            aria-label="Search conversations"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button class="search-clear" id="searchClear" type="button" aria-label="Clear search" hidden>
+            <i data-lucide="x" aria-hidden="true"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="sidebar-scroll">
+        <p class="sidebar-label">Recent conversations</p>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <button class="profile" type="button" id="profileBtn" data-tooltip="Settings">
+          <span class="avatar" aria-hidden="true"></span>
+          <span class="profile-info">
+            <span class="profile-name">Yogi</span>
+            <span class="profile-meta">AI Workspace</span>
+          </span>
+        </button>
+      </div>
+
+    </aside>
+
+    <!-- Mobile drawer backdrop -->
+
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+    <!-- ============ MAIN ============ -->
+
+    <main class="main" id="main">
+
+      <header class="header">
+
+        <div class="header-left">
+
+          <button class="icon-btn" type="button" id="sidebarToggle" aria-label="Toggle sidebar" title="Toggle sidebar (Ctrl+B)">
+            <i data-lucide="panel-left" aria-hidden="true"></i>
+          </button>
+
+          <select class="model-select" id="modelSelect" aria-label="Model"></select>
+
+        </div>
+
+        <div class="header-right">
+
+          <div class="status-pill" id="statusPill" data-state="idle" role="status" aria-live="polite">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="statusText">Not configured</span>
+          </div>
+
+          <button class="icon-btn" type="button" id="themeBtn" aria-label="Toggle theme">
+            <i data-lucide="moon" aria-hidden="true"></i>
+          </button>
+
+          <button class="icon-btn" type="button" id="exportBtn" aria-label="Export conversation" title="Export conversation">
+            <i data-lucide="download" aria-hidden="true"></i>
+          </button>
+
+          <button class="icon-btn" type="button" id="clearBtn" aria-label="Clear conversation" title="Clear conversation">
+            <i data-lucide="eraser" aria-hidden="true"></i>
+          </button>
+
+          <button class="icon-btn" type="button" id="settingsBtn" aria-label="Settings" title="Settings">
+            <i data-lucide="settings" aria-hidden="true"></i>
+          </button>
+
+        </div>
+
+      </header>
+
+      <section class="chat-scroll" id="chatScroll" tabindex="-1" aria-label="Chat messages">
+        <div class="chat-content" id="chatContent"></div>
+      </section>
+
+      <div class="composer-area">
+
+        <div class="composer-wrap">
+
+          <div class="attachments" id="attachmentList" hidden></div>
+
+          <div class="composer" id="composer">
+
+            <div class="attach-wrap">
+              <button
+                class="tool-btn"
+                type="button"
+                id="attachBtn"
+                aria-label="Attach files"
+                aria-haspopup="menu"
+                aria-expanded="false"
+              >
+                <i data-lucide="plus" aria-hidden="true"></i>
+              </button>
+
+              <div class="attach-menu" id="attachMenu" role="menu" aria-label="Attach options">
+
+                <button class="attach-option" type="button" role="menuitem" data-action="file">
+                  <i data-lucide="file-text" aria-hidden="true"></i>
+                  <span class="attach-option-label">
+                    Upload file
+                    <small>PDF, DOCX, TXT, Markdown, code</small>
+                  </span>
+                </button>
+
+                <button class="attach-option" type="button" role="menuitem" data-action="image">
+                  <i data-lucide="image" aria-hidden="true"></i>
+                  <span class="attach-option-label">
+                    Upload image
+                    <small>PNG, JPG, WEBP</small>
+                  </span>
+                </button>
+
+                <button class="attach-option" type="button" role="menuitem" data-action="browse">
+                  <i data-lucide="folder" aria-hidden="true"></i>
+                  <span class="attach-option-label">
+                    Browse computer
+                    <small>Select files from your device</small>
+                  </span>
+                </button>
+
+              </div>
+
+              <input type="file" id="fileInput" multiple hidden>
+              <input type="file" id="imageInput" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
+
+            </div>
+
+            <textarea
+              id="composerInput"
+              rows="1"
+              placeholder="Message Leazed AI…"
+              aria-label="Message"
+              autocomplete="off"
+            ></textarea>
+
+            <button class="tool-btn" type="button" id="voiceBtn" aria-label="Voice input" title="Voice input">
+              <i data-lucide="mic" aria-hidden="true"></i>
+            </button>
+
+            <button class="send-btn" type="button" id="sendBtn" aria-label="Send message" title="Send message" disabled>
+              <i data-lucide="arrow-up" aria-hidden="true"></i>
+            </button>
+
+          </div>
+
+          <p class="disclaimer">
+            Leazed AI can make mistakes. Verify important information.
+          </p>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+
+</body>
+
+</html>
